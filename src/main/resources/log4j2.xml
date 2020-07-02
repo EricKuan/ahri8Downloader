@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 優先等級: FATAL > ERROR > WARN >INFO > DEBUG -->
+<Configuration>
+    <properties>  
+        <property name="LOG_HOME">/log/mis</property>
+        <property name="FILE_NAME">mis</property>    
+    </properties>  
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </Console>
+        <File name="FILE" fileName="${LOG_HOME}/logfile_fileMode.log" append="true">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </File>
+        <RollingRandomAccessFile name="MIS_PROJECT" 
+            fileName="${LOG_HOME}/${FILE_NAME}.log" 
+            filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+        
+    </Appenders>
+    <Loggers>
+        <Logger name="com.opensymphony.xwork2" level="info"/>
+        <Logger name="org.apache.struts2" level="info"/>
+        
+        <Logger name="com.ek.runner" level="DEBUG" additivity="true">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>                  
+        </Root>      
+        <Root level="WARN">
+            <AppenderRef ref="MIS_PROJECT" />
+        </Root>        
+    </Loggers>
+</Configuration>

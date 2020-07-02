@@ -1,0 +1,5 @@
+getManga: 
+ rootpath: D:\temp\20190127\test
+ savepath: D:\temp\20190127\test\save
+ layer: 1
+ phantompath: F:\workspace\getManga\libs\phantomjs-2.1.1-windows\bin
