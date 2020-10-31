@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class ClamberService {
 
 	private static final Logger logger = LogManager.getLogger(ClamberService.class);
-	private static String BASE_URL = "https://ahri8.com/readOnline2.php?ID=";
+	private static String BASE_URL = "https://ahri-hentai.com/readOnline2.php?ID=";
 	
 	@Autowired
 	SystemConfig conf;
@@ -37,20 +37,21 @@ public class ClamberService {
 		String ID = url.substring(url.indexOf("ID=") + 3, url.length());
 		logger.info(ID);
 
-		webClient.getOptions().setUseInsecureSSL(true);
-		webClient.getOptions().setJavaScriptEnabled(false);
+		webClient.getOptions().setUseInsecureSSL(false);
+		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.getOptions().setCssEnabled(false);
-		webClient.getOptions().setRedirectEnabled(false);
+		webClient.getOptions().setRedirectEnabled(true);
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
 		webClient.getOptions().setTimeout(5000);
 		HtmlPage htmlPage = webClient.getPage(BASE_URL + ID + "&host_id=0");
 		webClient.waitForBackgroundJavaScript(3000);
 		HtmlElement body = htmlPage.getBody();
-
+//		logger.info(body.asXml());
 		Document doc = Jsoup.parse(body.asXml());
+
 		String pages = doc.getElementById("next_page_btn_area2").select("a").last().attr("href");
 		pages = pages.substring(pages.lastIndexOf("=") + 1, pages.length());
-		logger.info(pages);
+//		logger.info(pages);
 
 		int maxPage = Integer.valueOf(pages);
 

@@ -45,7 +45,7 @@ public class ClambController {
 
 	public void exec() throws Exception {
 		
-		ExecutorService executor = Executors.newCachedThreadPool();
+		ExecutorService executor = Executors.newFixedThreadPool(5);
 		FileInputStream fileInStreamObj = new FileInputStream("./conf/downliadList.txt");
 		InputStream inStreamObject = fileInStreamObj;
 		Scanner sc = new Scanner(inStreamObject);

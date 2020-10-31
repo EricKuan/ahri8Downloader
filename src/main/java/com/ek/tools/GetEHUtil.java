@@ -89,6 +89,11 @@ public  class GetEHUtil {
 		boolean doSuccess = true;
 		BufferedReader in = null;
 		try {
+			if(!sURL.startsWith("http")){
+				StringBuffer sb = new StringBuffer();
+				sb.append("http:").append(sURL);
+				sURL = sb.toString();
+			}
 			URL url = new URL(sURL);
 			HttpURLConnection URLConn = null;
 			URLConn = (HttpURLConnection) url.openConnection();
