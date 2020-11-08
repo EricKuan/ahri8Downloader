@@ -1,6 +1,5 @@
 package com.ek.controller;
 
-import com.ek.executor.GetPagePhotoExecutor;
 import com.ek.service.ClamberService;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +21,7 @@ public class ClambController {
   @Autowired ClamberService clambService;
 
 
-  private static final Logger logger = LogManager.getLogger(GetPagePhotoExecutor.class);
+  private static final Logger logger = LogManager.getLogger(ClambController.class);
 
   public void exec() throws Exception {
 
